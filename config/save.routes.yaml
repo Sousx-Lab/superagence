@@ -1,0 +1,22 @@
+property.index:
+   path: /biens
+   controller: App\Controller\PropertyController::index
+
+property.show:
+   path: /biens/{slug}-{id}
+   controller: App\Controller\PropertyController::show
+   requirements:
+      slug: "[a-z0-9-/]*"
+      id: '\d+'
+
+admin.property.index:
+   path: /admin
+   controller: App\Controller\Admin\AdminPropertyController::index
+
+admin.property.edit:
+   path: /admin/property/{id}
+   controller: App\Controller\Admin\AdminPropertyController::edit
+
+admin.property.new:
+   path: /admin/property/create
+   controller: App\Controller\Admin\AdminPropertyController::new
