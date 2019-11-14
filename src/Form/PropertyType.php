@@ -33,8 +33,9 @@ class PropertyType extends AbstractType
                 'multiple'     => true,
                 'required'     => false
             ])
-            ->add('imgfile', FileType::class, [
+            ->add('pictureFiles', FileType::class, [
                 'required' => false,
+                'multiple' => true,
                 'label'    => 'Ajouter une image',
                 'label_attr' => [
                     'data-browse' => 'Parcourir'

@@ -18,11 +18,11 @@
         {% endif %}
         <div class="row">
             <div class="col-md-8">
-                {% if property.filename %}
-                <img src="{{vich_uploader_asset (property, 'imgfile') | imagine_filter('medium')}}"
-                    alt="{{property.filename}}" style="width: 100%; height:auto;">
+                {% if property.picture %}
+                <img src="{{ vich_uploader_asset (property.picture, 'imgfile') | imagine_filter('medium')}}"
+                    alt="" style="width: 100%; height:auto;">
                 {% else %}
-                <img src="{{'/img/properties/empty.jpg' | imagine_filter('medium')}}" alt=""
+                <img src="{{'/img/empty.jpg' | imagine_filter('medium')}}" alt=""
                     style="width: 100%; height:auto;">
                 {% endif %}
             </div>
@@ -30,8 +30,8 @@
                 <h1>{{ property.title }}</h1>
                 <h2>{{ property.rooms }} Pièces - {{ property.surface }} m²</h2>
                 <div class="text-primary" style="font-size: 4rem; font-weight:bold;">{{ property.formattedPrice }}</div>
-                <a href="" class="btn btn-primary">Contacter l'agence</a>
-                <div id="contactForm"class="mt-4">
+                <a href="" class="btn btn-primary" id="contactButton"{% if form.vars.submitted %}style="display: none;" {% endif %}>Contacter l'agence</a>
+                <div id="contactForm"class="mt-4"{% if not form.vars.submitted %}style="display: none;"{% endif %}>
                     {{ form_start(form)}}
                     <div class="row">
                         <div class="col">{{ form_row(form.firstname)}}</div>
