@@ -4,28 +4,36 @@
 
 {% block body %}
 <div class="jumboton">
-  <div class="container mt-4">
-    {{ form_start (form) }}
-    <div class="form-row align-items-end">
-      <div class="col">
-        {{ form_row (form.minSurface) }}
-      </div>
-      <div class="col">
-        {{ form_row (form.maxPrice) }}
-      </div>
-      <div class="col">
+    <div class="container mt-4">
+      {{ form_start (form) }}
+      <div class="form-row align-items-end">
+        <div class="col">
+          {{ form_row (form.minSurface) }}
+          </div>
+            <div class="col">
+              {{ form_row (form.maxPrice) }}
+            </div>
+        <div class="col">
         {{ form_row (form.options) }}
       </div>
-      <div class="col">
-        <div class="form-group">
-        <button class="btn btn-primary">Recherche</button>
+  <div class="col">
+   <div class="form-group">
+      <input class="form-control" type="text" value="" placeholder="Ville" id="seach_address">
+    </div>
       </div>
+          <div class="col">
+            {{ form_row (form.distance) }}
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <button class="btn btn-primary">Recherche</button>
+            </div>
+          </div>
+        </div>
+        {{ form_end (form) }}
       </div>
     </div>
-    {{ form_end (form) }}
-  </div>
-</div>
-<div class="container mt-4">
+    <div class="container mt-4">
   <h1>Voir tous nom biens</h1>
   <div class="row">
     {% for property in properties %}

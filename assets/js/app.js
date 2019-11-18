@@ -1,11 +1,11 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import Placess from './modules/Placess'
+import Map from './modules/Map'
+import 'slick-carousel'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
-// any CSS you require will output into a single css file (app.css in this case)
+Map.init()
+Placess.init()
 
 global.$ = global.jQuery = $;
 require('../css/app.css');
@@ -19,6 +19,7 @@ $contactButton.click(e => {
     $contactButton.slideUp();
 })
 
+$('[data-slider]').slick()
 //Suppression des images
 
 document.querySelectorAll('[data-delete]').forEach(a => {

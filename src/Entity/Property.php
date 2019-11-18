@@ -20,7 +20,8 @@ class Property
     const HEAT = [
         0 => 'Electrique',
         1 => 'Gaz',
-        2 => 'Fioul'
+        2 => 'Fioul',
+        3 => 'Collectif'
     ];
     /**
      * @ORM\Id()
@@ -108,6 +109,11 @@ class Property
     private $updated_at;
 
     /**
+     * @var Picture|null
+     */
+    private $picture;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="property", orphanRemoval=true, cascade={"persist"})
      */
     private $pictures;
@@ -119,6 +125,16 @@ class Property
      * })
      */
     private $pictureFiles;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=6)
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float", scale=4, precision=7)
+     */
+    private $lng;
 
     public function __construct()
     {
@@ -353,10 +369,13 @@ class Property
 
     public function getPicture(): ?Picture
     {
-        if($this->pictures->isEmpty()){
-            return null;
-        }
-        return $this->pictures->first();
+        return $this->picture;
+    }
+
+    public function setPicture(Picture $picture): self
+    {
+        $this->picture = $picture;
+        return $this;
     }
 
     public function addPicture(Picture $picture): self
@@ -402,6 +421,30 @@ class Property
             $this->addPicture($picture);
         }
         $this->pictureFiles = $pictureFiles;
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng): self
+    {
+        $this->lng = $lng;
+
         return $this;
     }
 }

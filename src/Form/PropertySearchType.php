@@ -6,6 +6,8 @@ use App\Entity\Option;
 use App\Entity\PropertySearch;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +21,7 @@ class PropertySearchType extends AbstractType
                 'required' => false,
                 'label'    => false,
                 'attr'     => [
-                    'placeholder' => 'Surface minimale (m²)'
+                    'placeholder' => 'Surface minimale'
                 ]
             ])
             ->add('maxPrice', IntegerType::class, [
@@ -34,8 +36,24 @@ class PropertySearchType extends AbstractType
                 'label'    => false,
                 'class'    => Option::class,
                 'choice_label' => 'name',
-                'multiple' => true
-            ]);
+                'multiple' => true,
+                'attr'     => [
+                    'placeholder' => 'Surface minimale'
+                ]
+            ])
+            ->add('distance', ChoiceType::class, [
+                'label' => 'Rayon',
+                'choices' => [
+                    '5 Km' => 5,
+                    '10 Km' => 10,
+                    '25 Km' => 25,
+                    '50 Km' => 50,
+                    '100 Km' => 100,
+                ]
+            ])
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver)

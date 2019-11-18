@@ -6,32 +6,37 @@
 <div class="jumbotron">
     <div class="container">
         {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
         {% endfor %}
 
         {% if not form.vars.valid %}
         <div class="alert alert-danger">
-                Veuillez svp corrigez les erreurs indiqué 
-            </div>
+            Veuillez svp corrigez les erreurs indiqué
+        </div>
         {% endif %}
         <div class="row">
             <div class="col-md-8">
-                {% if property.picture %}
-                <img src="{{ vich_uploader_asset (property.picture, 'imgfile') | imagine_filter('medium')}}"
-                    alt="" style="width: 100%; height:auto;">
-                {% else %}
-                <img src="{{'/img/empty.jpg' | imagine_filter('medium')}}" alt=""
-                    style="width: 100%; height:auto;">
-                {% endif %}
+                <div data-slider>
+                    {% if property.pictures is empty %}
+                    <img src="{{'/img/empty.jpg' | imagine_filter('medium')}}" alt="card-img-top"
+                        style="width: 100%; height:auto;">
+                    {% else %}
+                    {% for picture in property.pictures %}
+                    <img src="{{ vich_uploader_asset (picture, 'imgfile') | imagine_filter('medium')}}"
+                        alt="card-img-top" style="width: 100%; height:auto;">
+                    {% endfor %}
+                    {% endif %}
+                </div>
             </div>
             <div class="col-md-4">
                 <h1>{{ property.title }}</h1>
                 <h2>{{ property.rooms }} Pièces - {{ property.surface }} m²</h2>
                 <div class="text-primary" style="font-size: 4rem; font-weight:bold;">{{ property.formattedPrice }}</div>
-                <a href="" class="btn btn-primary" id="contactButton"{% if form.vars.submitted %}style="display: none;" {% endif %}>Contacter l'agence</a>
-                <div id="contactForm"class="mt-4"{% if not form.vars.submitted %}style="display: none;"{% endif %}>
+                <a href="" class="btn btn-primary" id="contactButton" {% if form.vars.submitted %}style="display: none;"
+                    {% endif %}>Contacter l'agence</a>
+                <div id="contactForm" class="mt-4" {% if not form.vars.submitted %}style="display: none;" {% endif %}>
                     {{ form_start(form)}}
                     <div class="row">
                         <div class="col">{{ form_row(form.firstname)}}</div>
@@ -85,10 +90,11 @@
             <h2>Spécificités</h2>
             <ul class="list-group">
                 {% for option in property.options %}
-                   <li class="list-group-item">{{ option.name }}</li>
+                <li class="list-group-item">{{ option.name }}</li>
                 {% endfor %}
             </ul>
         </div>
     </div>
+    <div id="map" style="width: 100%; height: 400px;" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
 </div>
 {% endblock %}
