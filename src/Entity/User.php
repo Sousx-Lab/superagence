@@ -98,7 +98,7 @@ class User implements UserInterface,\Serializable
     }
 
     /**
-     * String representation of obkect
+     * String representation of object
      *
      * @return string the string representation of the oblect or null
      */

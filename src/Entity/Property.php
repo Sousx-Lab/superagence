@@ -369,7 +369,11 @@ class Property
 
     public function getPicture(): ?Picture
     {
-        return $this->picture;
+         if($this->pictures->isEmpty()){
+            return null;
+        }
+        return $this->pictures->first();
+    }
     }
 
     public function setPicture(Picture $picture): self
