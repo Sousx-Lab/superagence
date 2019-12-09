@@ -374,7 +374,6 @@ class Property
         }
         return $this->pictures->first();
     }
-    }
 
     public function setPicture(Picture $picture): self
     {
